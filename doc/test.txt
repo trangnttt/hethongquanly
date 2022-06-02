@@ -1,0 +1,1 @@
+this is a test used file_get_contents function. used file_get_contents function.
