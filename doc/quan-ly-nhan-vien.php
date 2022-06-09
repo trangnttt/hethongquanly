@@ -67,227 +67,253 @@ if (isset($_POST['update'])) {
                                 Excel</button>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" id="cmd"><i
-                                    class="fas fa-file-pdf"></i> Xuất PDF</a>
+                            <!-- <a href="delete-all.php" class="btn btn-secondary btn-md" type="button"><i
+                                    class="fas fa-trash-alt"></i> Xóa tất cả </a> -->
+                            <button class='btn btn-secondary btn-md' data-toggle='modal' data-target='#ModalDelAll'><i
+                                    class='fas fa-trash-alt'></i> Xóa tất cả
+                            </button>
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-secondary btn-md" type="button" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                        <div class="col-sm-4">
+                            <input type="text" id="searchTable" placeholder="Tìm kiếm ..." title="Tìm kiếm">
                         </div>
                     </div>
-                    <div id="exportPDF">
-                        <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
-                            border="0" id="sampleTable" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Stt</th>
-                                    <th>ID nhân viên</th>
-                                    <th>Họ và tên</th>
-                                    <th class="noExl">Ảnh thẻ</th>
-                                    <th>Ngày sinh</th>
-                                    <th>SĐT</th>
-                                    <th>Chức vụ</th>
-                                    <th class="noExl">Tính năng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
+                        border="0" id="sampleTable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Stt</th>
+                                <th>ID nhân viên</th>
+                                <th>Họ và tên</th>
+                                <th class="noExl">Ảnh thẻ</th>
+                                <th>Ngày sinh</th>
+                                <th>SĐT</th>
+                                <th>Chức vụ</th>
+                                <th class="noExl">Tính năng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-tbody">
+                            <?php
                   $counter = 1;
                   $data = "SELECT * FROM NhanVien"; 
                   $result = $conn->query($data);                          
                   while($ser=mysqli_fetch_array($result)) { 
                 ?>
-                                <tr>
-                                    <td><?php echo $counter;  $counter++; ?></td>
-                                    <td><?php echo $ser['ID'];?></td>
-                                    <td><?php echo $ser['FullName'];?></td>
-                                    <td class="noExl"><img class='img-card-person'
-                                            src='../images/<?php echo $ser['Avatar']; ?>' alt=''>
-                                    </td>
-                                    <td><?php $date=date_create($ser['NgaySinh']); echo date_format($date,"d/m/Y"); ?>
-                                    </td>
-                                    <td><?php echo $ser['SDT'];?></td>
-                                    <td><?php echo $ser['ChucVu'];?></td>
-                                    <td class="noExl">
-                                        <a href="view-nhan-vien.php?id=<?php echo $ser['ID']; ?>"
-                                            class="btn btn-info btn-sm edit"><i class='far fa-eye'></i></a>
-                                        <button class='btn btn-save btn-sm edit' title='Sửa' id='show-emp'
-                                            data-toggle='modal' data-target='#ModalEDit<?php echo $ser['ID'];?>'><i
-                                                class='fas fa-edit'></i>
-                                        </button>
-                                        <button class='btn btn-md trash' title='Xóa' data-toggle='modal'
-                                            data-target='#ModalDel<?php echo $ser['ID'];?>'><i
-                                                class='fas fa-trash-alt'></i>
-                                        </button>
+                            <tr>
+                                <td><?php echo $counter;  $counter++; ?></td>
+                                <td><?php echo $ser['ID'];?></td>
+                                <td><?php echo $ser['FullName'];?></td>
+                                <td class="noExl"><img class='img-card-person'
+                                        src='../images/<?php echo $ser['Avatar']; ?>' alt=''>
+                                </td>
+                                <td><?php $date=date_create($ser['NgaySinh']); echo date_format($date,"d/m/Y"); ?>
+                                </td>
+                                <td><?php echo $ser['SDT'];?></td>
+                                <td><?php echo $ser['ChucVu'];?></td>
+                                <td class="noExl">
+                                    <a href="view-nhan-vien.php?id=<?php echo $ser['ID']; ?>"
+                                        class="btn btn-info btn-sm edit"><i class='far fa-eye'></i></a>
+                                    <button class='btn btn-save btn-sm edit' title='Sửa' id='show-emp'
+                                        data-toggle='modal' data-target='#ModalEDit<?php echo $ser['ID'];?>'><i
+                                            class='fas fa-edit'></i>
+                                    </button>
+                                    <button class='btn btn-md trash' title='Xóa' data-toggle='modal'
+                                        data-target='#ModalDel<?php echo $ser['ID'];?>'><i class='fas fa-trash-alt'></i>
+                                    </button>
 
-                                        <!--MODAL EDIT-->
-                                        <div class="modal fade" id="ModalEDit<?php echo $ser['ID'];?>" tabindex="-1"
-                                            role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="form-group  col-md-12">
-                                                                <span class="thong-tin-thanh-toan">
-                                                                    <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
-                                                                </span>
-                                                            </div>
+                                    <!--MODAL EDIT-->
+                                    <div class="modal fade" id="ModalEDit<?php echo $ser['ID'];?>" tabindex="-1"
+                                        role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="form-group  col-md-12">
+                                                            <span class="thong-tin-thanh-toan">
+                                                                <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
+                                                            </span>
                                                         </div>
-                                                        <form id="formUpdate" action="" name="form" method="post">
-                                                            <input name="id" type="hidden"
-                                                                value="<?php echo $ser['ID'];?>" />
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label class="control-label">ID nhân viên</label>
-                                                                    <input class="form-control" type="text" required
-                                                                        value="<?php echo $ser['ID'];?>" disabled>
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label class="control-label">Họ và tên</label>
-                                                                    <input class="form-control" type="text" name="name"
-                                                                        required value="<?php echo $ser['FullName'];?>">
-                                                                </div>
-                                                                <div class="form-group  col-md-6">
-                                                                    <label class="control-label">Số điện thoại</label>
-                                                                    <input class="form-control" type="number" name="sdt"
-                                                                        required value="<?php echo $ser['SDT'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label class="control-label">Địa chỉ email</label>
-                                                                    <input class="form-control" type="text" name="email"
-                                                                        required value="<?php echo $ser['Email'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-12">
-                                                                    <label class="control-label">Địa chỉ</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="diachi"
-                                                                        value="<?php echo $ser['DiaChi'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Ngày sinh</label>
-                                                                    <input class="form-control" type="date"
-                                                                        name="ngaysinh"
-                                                                        value="<?php echo $ser['NgaySinh'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="exampleSelect1"
-                                                                        class="control-label">Chức
-                                                                        vụ</label>
-
-                                                                    <select class="form-control" name="chucvu"
-                                                                        id="exampleSelect1">
-                                                                        <option value="<?php echo $ser['ChucVu'];?>">
-                                                                            <?php echo $ser['ChucVu'];?></option>
-                                                                        <?php
+                                                    </div>
+                                                    <form id="formUpdate" action="" name="form" method="post">
+                                                        <input name="id" type="hidden"
+                                                            value="<?php echo $ser['ID'];?>" />
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">ID nhân viên</label>
+                                                                <input class="form-control" type="text" required
+                                                                    value="<?php echo $ser['ID'];?>" disabled>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Họ và tên</label>
+                                                                <input class="form-control" type="text" name="name"
+                                                                    required value="<?php echo $ser['FullName'];?>">
+                                                            </div>
+                                                            <div class="form-group  col-md-6">
+                                                                <label class="control-label">Số điện thoại</label>
+                                                                <input class="form-control" type="number" name="sdt"
+                                                                    required value="<?php echo $ser['SDT'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Địa chỉ email</label>
+                                                                <input class="form-control" type="text" name="email"
+                                                                    required value="<?php echo $ser['Email'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label class="control-label">Địa chỉ</label>
+                                                                <input class="form-control" type="text" name="diachi"
+                                                                    value="<?php echo $ser['DiaChi'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Ngày sinh</label>
+                                                                <input class="form-control" type="date" name="ngaysinh"
+                                                                    value="<?php echo $ser['NgaySinh'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="exampleSelect1" class="control-label">Chức
+                                                                    vụ</label>
+                                                                <select class="form-control" name="chucvu"
+                                                                    id="exampleSelect1">
+                                                                    <option value="<?php echo $ser['ChucVu'];?>">
+                                                                        <?php echo $ser['ChucVu'];?></option>
+                                                                    <?php
                   $chucvuOld = $ser['ChucVu'];
                   $dataCV = "SELECT * FROM chucvu WHERE ChucVu NOT LIKE N'$chucvuOld'"; 
                   $resultCV = $conn->query($dataCV);                          
                   while($serCV=mysqli_fetch_array($resultCV)) { 
                 ?>
-                                                                        <option value="<?php echo $serCV['ChucVu'];?>">
-                                                                            <?php echo $serCV['ChucVu'];?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Tình trạng hôn
-                                                                        nhân</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="honnhan"
-                                                                        value="<?php echo $ser['TinhTrangHonNhan'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Bằng Cấp</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="bangcap"
-                                                                        value="<?php echo $ser['BangCap'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Account</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="account"
-                                                                        value="<?php echo $ser['AccountLogin'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Password</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="password"
-                                                                        value="<?php echo $ser['Password'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">CCCD</label>
-                                                                    <input class="form-control" type="text" name="cccd"
-                                                                        value="<?php echo $ser['CCCD'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Ngày cấp</label>
-                                                                    <input class="form-control" type="date"
-                                                                        name="ngaycap"
-                                                                        value="<?php echo $ser['NgayCap'];?>">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label">Nơi cấp</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="noicap"
-                                                                        value="<?php echo $ser['NoiCap'];?>">
-                                                                </div>
-                                                                <div class="modal-footer col-md-12">
-                                                                    <button class="btn btn-save" name="update"
-                                                                        type="submit">Lưu lại</button>
-                                                                    <button type="reset" class="btn btn-cancel"
-                                                                        id="btnReset" onclick="reSet()">Hủy bỏ</button>
-                                                                </div>
+                                                                    <option value="<?php echo $serCV['ChucVu'];?>">
+                                                                        <?php echo $serCV['ChucVu'];?></option>
+                                                                    <?php } ?>
+                                                                </select>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Tình trạng hôn
+                                                                    nhân</label>
+                                                                <select name="honnhan" class="form-control"
+                                                                    id="exampleSelect2">
+                                                                    <option><?php echo $ser['TinhTrangHonNhan'];?>
+                                                                    </option>
+                                                                    <option value="Độc thân">Độc thân</option>
+                                                                    <option value="Đã kết hôn">Đã kết hôn</option>
+                                                                    <option value="Khác">Khác</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Bằng Cấp</label>
+                                                                <select name="bangcap" class="form-control">
+                                                                    <option><?php echo $ser['BangCap'];?></option>
+                                                                    <option value="Đại Học">Đại Học</option>
+                                                                    <option value="Cao Đẳng">Cao Đẳng</option>
+                                                                    <option value="Phổ Thông">Phổ Thông</option>
+                                                                    <option value="Chưa tốt nghiệp">Chưa tốt nghiệp</option>
+                                                                    <option value="Không bằng cấp">Không bằng cấp</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Account</label>
+                                                                <input class="form-control" type="text" name="account"
+                                                                    value="<?php echo $ser['AccountLogin'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Password</label>
+                                                                <input class="form-control" type="text" name="password"
+                                                                    value="<?php echo $ser['Password'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">CCCD</label>
+                                                                <input class="form-control" type="number" name="cccd"
+                                                                    value="<?php echo $ser['CCCD'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Ngày cấp</label>
+                                                                <input class="form-control" type="date" name="ngaycap"
+                                                                    value="<?php echo $ser['NgayCap'];?>">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label class="control-label">Nơi cấp</label>
+                                                                <input class="form-control" type="text" name="noicap"
+                                                                    value="<?php echo $ser['NoiCap'];?>">
+                                                            </div>
+                                                            <div class="modal-footer col-md-12">
+                                                                <button class="btn btn-save" name="update"
+                                                                    type="submit">Lưu lại</button>
+                                                                <button class="btn btn-cancel" type="reset">Hủy bỏ</button>   
+                                                                <button type="reset" class="btn btn-delete"
+                                                                    id="btnReset" onclick="reSet()">Đóng</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- END MODAL EDIT-->
+                                    </div>
+                                    <!-- END MODAL EDIT-->
 
-                                        <!--MODAL DELETE-->
-                                        <div class="modal fade" id="ModalDel<?php echo $ser['ID'];?>" tabindex="-1"
-                                            role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
+                                    <!--MODAL DELETE-->
+                                    <div class="modal fade" id="ModalDel<?php echo $ser['ID'];?>" tabindex="-1"
+                                        role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
 
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="form-group  col-md-12">
-                                                                <span class="thong-tin-thanh-toan">
-                                                                    <h5>Xóa nhân viên</h5>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="txt-delete">
-                                                            <p>Bạn có chắc chắn muốn xóa nhân viên <br>
-                                                                <b><?php echo $ser['FullName'];?></b> mã số
-                                                                <b><?php echo $ser['ID'];?></b> ???
-                                                            </p>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="form-group  col-md-12">
+                                                            <span class="thong-tin-thanh-toan">
+                                                                <h5>Xóa nhân viên</h5>
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <a class="btn btn-delete"
-                                                            href="delete.php?id=<?php echo $ser['ID']; ?>&table=NhanVien">Xóa</a>
-                                                        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy
-                                                            bỏ</a>
+                                                    <div class="txt-delete">
+                                                        <p>Bạn có chắc chắn muốn xóa nhân viên <br>
+                                                            <b><?php echo $ser['FullName'];?></b> mã số
+                                                            <b><?php echo $ser['ID'];?></b> ???
+                                                        </p>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-delete"
+                                                        href="delete.php?id=<?php echo $ser['ID']; ?>&table=NhanVien">Xóa</a>
+                                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy
+                                                        bỏ</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- END MODAL DELETE-->
+                                    </div>
+                                    <!-- END MODAL DELETE-->
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <!-- MODAL DELETE ALL-->
+                    <div class="modal fade" id="ModalDelAll" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
 
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="form-group  col-md-12">
+                                            <span class="thong-tin-thanh-toan">
+                                                <h5>Xóa tất cả dữ liệu</h5>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="txt-delete">
+                                        <p>Bạn có chắc chắn muốn xóa</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-delete" href="delete.php?table=NhanVien">Xóa</a>
+                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy
+                                        bỏ</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- END MODAL DELETE ALL-->
                 </div>
             </div>
         </div>
     </div>
-
 </main>
 
 <?php include "../includes/footer.php" ?>

@@ -57,9 +57,9 @@ if (isset($_POST['addNV'])) {
   $result = mysqli_query($conn,$sql);
   $num_rows = mysqli_num_rows($result);
   if ($num_rows < 1) {
-    $sql="INSERT INTO nhanvien VALUES('".$id."','".$name."','".$email."','".$diachi."','".$ngaysinh."','".$gioitinh."'
-    ,'".$sdt."','".$hinhanh."','".$cccd."','".$noicap."','".$ngaycap."','".$bangcap."','".$honnhan."','".$chucvu."'
-    ,'".$account."','".$password."',0)";
+    $sql="INSERT INTO nhanvien VALUES('".$id."','".$name."','".$email."','".$diachi."','".$sdt."','".$ngaysinh."'
+    ,'".$cccd."','".$ngaycap."','".$noicap."','".$gioitinh."','".$chucvu."','".$bangcap."','".$honnhan."'
+    ,'".$account."','".$password."','".$hinhanh."',0)";
     $query = mysqli_query($conn,$sql);
     if(!$query)
     {

@@ -19,8 +19,6 @@
   <!--===============================================================================================-->
   <script src="js/jquery.table2excel.min.js"></script>
   <!--========alert===================================================================================-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-  
   <script>
     $("#alert-validate").fadeTo(2000, 500).slideUp(500, function() {
         $("#alert-validate").slideUp(100);
@@ -89,8 +87,16 @@
             filename: "data-" + name, //do not include extension
         });
     };
-    // <!---------pdfTable----------------------------------------------------------------------->
-
+    // <!---------searchTable----------------------------------------------------------------------->
+    $(document).ready(function(){
+        $("#searchTable").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table-tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
   </script>
   </body>
 

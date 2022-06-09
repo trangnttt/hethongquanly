@@ -85,7 +85,7 @@ require_once '../connect.php';
         </div>
     <?php } ?>
         <div class="col-md-12">
-            <a href="javascript:history.go(-1)" class="btn btn-info btn-md"><i class='fas fa-reply-all'></i> Quay lại</a>
+            <a href="../doc/quan-ly-nhan-vien.php" class="btn btn-info btn-md"><i class='fas fa-reply-all'></i> Quay lại</a>
         </div>
     </div>
   </main>
