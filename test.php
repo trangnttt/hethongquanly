@@ -1,1 +1,0 @@
-<style type="text/css">table {table-layout: auto;width: 100%;}table th, table td {border:1px solid #000;padding:0.5em;text-align: center;vertical-align: middle;}table td img{width: 100px;height: 100px;}table th:last-child, table td:last-child {display: none;}</style>
