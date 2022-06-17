@@ -11,7 +11,7 @@
   <!--===============================================================================================-->
   <script type="text/javascript" src="../../styles/js/plugins/chart.js"></script>
   <!--===============================================================================================-->
-  <script src="../../styles/js/date.js"></script>
+  <script src="../../styles/js/date.js" type="text/javascript"></script>
   <!--===============================================================================================-->
   <script src="../../styles/js/menu-active.js"></script>
   <!--===============================================================================================-->
@@ -92,12 +92,32 @@ function excelTable(name) {
 // <!---------searchTable----------------------------------------------------------------------->
 $(document).ready(function() {
     $("#searchTable").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#table-tbody tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+        // var value = $(this).val().toLowerCase();
+        // $("#table-tbody tr").filter(function() {
+        //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        // })
+
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchTable");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table-tbody");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                $("#table-notify").text("");
+            } else {
+                tr[i].style.display = "none";
+                $("#table-notify").text("Không có dữ liệu!!!");
+            }
+            }       
+        }
     });
 });
+
 // <!---------check All input----------------------------------------------------------------------->
 $("#checkAll").click(function() {
     $('input:checkbox').not(this).prop('checked', this.checked);
@@ -118,7 +138,7 @@ $(document).ready(function() {
 let rows = []
 $('table tbody tr').each(function(i, row) {
     var count_elements = $('table tbody tr').length;
-    if(count_elements <= 10) {
+    if (count_elements <= 10) {
         $("#pagination").css("display", "none");
     }
     return rows.push(row);

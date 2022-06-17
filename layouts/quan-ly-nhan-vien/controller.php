@@ -39,9 +39,9 @@ if (isset($_SESSION['validate'])){
 // thêm chức vụ
 if (isset($_POST['addChucVu'])) {
   $chucvuNew=$_POST['chucvuNew'];
-  $maxId = "SELECT * FROM chucvu ORDER BY id DESC LIMIT 1"; 
+  $maxId = "SELECT * FROM chucvu ORDER BY ID DESC LIMIT 1"; 
   $result = $conn->query($maxId);
-  if (mysqli_num_rows($result) < 1) {
+  if (mysqli_num_rows($result) == 0) {
     $sql="INSERT INTO chucvu VALUES(1,'".$chucvuNew."')";
     $query = mysqli_query($conn,$sql);
           if(!$query)
@@ -56,7 +56,7 @@ if (isset($_POST['addChucVu'])) {
   } 
   else {
     while($ser=mysqli_fetch_array($result)) { 
-        $id = $ser['id'] + 1;
+        $id = $ser['ID'] + 1;
         $chucvuOld = $ser['ChucVu'];
         if($chucvuOld !== $chucvuNew) {
           $sql="INSERT INTO chucvu VALUES($id,'".$chucvuNew."')";
@@ -89,8 +89,10 @@ if (isset($_POST['delChucVu'])) {
     }
     else
     {
-        $alertCV = 1;
-        $title= "Xóa chức vụ thành công";
+      $update = "UPDATE nhanvien SET ChucVu='Không có chức vụ' WHERE ChucVu in($listCheck) ";
+      $result = mysqli_query($conn,$update);;
+      $alertCV = 1;
+      $title= "Xóa chức vụ thành công";
     }
 }
 
@@ -111,22 +113,24 @@ if (isset($_POST['addNV'])) {
   $honnhan=$_POST['honnhan'];
   $account=$_POST['account'];
   $password=$_POST['password'];
+  $ngayvaolam=$_POST['ngayvaolam'];
   $rule=$_POST['rule'];
   $hinhanh=$_FILES['ImageUpload']['name'];
   
-  $selectImg = "SELECT * FROM NhanVien WHERE Avatar = '$hinhanh'"; 
+  // check hình ảnh có chưa nếu có rồi không lưu nữa
+  $selectImg = "SELECT * FROM NhanVien WHERE Avatar = '$hinhanh'";
   $checkImg = mysqli_num_rows(mysqli_query($conn,$selectImg));
-    if($hinhanh && ($checkImg<0)) {
-        $urlImg = '../images/'.$hinhanh;
-        move_uploaded_file( $_FILES['ImageUpload']['tmp_name'], $urlImg);
-    }
-  $sql = "SELECT * FROM NhanVien WHERE ID = '".$id."'";
+  if($hinhanh && ($checkImg<1)) {
+    $urlImg = '../../images/img-anhthe/'.$hinhanh;
+    move_uploaded_file( $_FILES['ImageUpload']['tmp_name'], $urlImg);
+  }
+  $sql = "SELECT * FROM NhanVien WHERE CCCD = '".$cccd."'";
   $result = mysqli_query($conn,$sql);
   $num_rows = mysqli_num_rows($result);
   if ($num_rows < 1) {
     $sql="INSERT INTO nhanvien VALUES('".$id."','".$name."','".$email."','".$diachi."','".$sdt."','".$ngaysinh."'
     ,'".$cccd."','".$ngaycap."','".$noicap."','".$gioitinh."','".$chucvu."','".$bangcap."','".$honnhan."'
-    ,'".$account."','".$password."','".$hinhanh."','".$rule."')";
+    ,'".$account."','".$password."','".$hinhanh."','".$rule."','".$ngayvaolam."')";
     $query = mysqli_query($conn,$sql);
     if(!$query)
     {

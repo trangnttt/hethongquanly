@@ -19,7 +19,7 @@ require_once '../../connect.php';
         while($ser=mysqli_fetch_array($result)) { 
     ?>  
         <div class="form-group col-md-6">
-            <img src="../../images/<?php echo $ser['Avatar'];?>" alt="" width="250px">
+            <img src="../../images/img-anhthe/<?php echo $ser['Avatar'];?>" alt="" width="250px">
         </div>
         <div class="col-md-6">
             <div class="form-group">
@@ -83,10 +83,14 @@ require_once '../../connect.php';
             <label class="control-label">Password</label>
             <input class="form-control" type="text" value="<?php echo $ser['Password'];?>" disabled>
         </div>
-    <?php } ?>
         <div class="col-md-12">
-            <a href="../../layouts/quan-ly-nhan-vien" class="btn btn-info btn-md"><i class='fas fa-reply-all'></i> Quay lại</a>
+        <!-- href="../../layouts/delete.php?id=<?php echo $ser['ID']; ?>&table=NhanVien"> -->
+            <a href="../../layouts/quan-ly-nhan-vien" class="btn btn-info btn-sm"><i class='fas fa-reply-all'></i> Quay lại</a>
+            <a href="../../layouts/quan-ly-noi-bo/add.php&id=<?php echo $ser['ID']; ?>&FullName=<?php echo $ser['FullName'];?>" 
+            class="btn btn-primary btn-md"><i class='fa fa-warning'></i> Kỷ luật nội bộ</a>
         </div>
+        
+    <?php } ?>
     </div>
   </main>
 

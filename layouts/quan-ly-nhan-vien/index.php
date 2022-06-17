@@ -38,17 +38,17 @@ include "controller.php";
                                 Excel</button>
                         </div>
                         <div class="col-sm-2">
-                            <!-- <a href="delete-all.php" class="btn btn-secondary btn-md" type="button"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a> -->
                             <button class='btn btn-secondary btn-md' data-toggle='modal' data-target='#ModalDelAll'><i
                                     class='fas fa-trash-alt'></i> Xóa tất cả
                             </button>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="searchTable" placeholder="Tìm kiếm ..." title="Tìm kiếm">
+                            <input type="text" id="searchTable" placeholder="Tìm kiếm theo tên..." title="Tìm kiếm">
+
                         </div>
                     </div>
-                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
+                    <div style="overflow-x: auto;">
+                    <table class="table table-hover table-bordered" cellpadding="0" cellspacing="0"
                         border="0" id="sampleTable" width="100%">
                         <thead>
                             <tr>
@@ -65,24 +65,25 @@ include "controller.php";
                         <tbody id="table-tbody">
                             <?php
                   $counter = 1;
-                  $data = "SELECT * FROM NhanVien"; 
+                  $data = "SELECT * FROM NhanVien ORDER BY FullName"; 
                   $result = $conn->query($data);                          
                   while($ser=mysqli_fetch_array($result)) { 
                 ?>
                             <tr>
-                                <td><?php echo $counter;  $counter++; ?></td>
-                                <td><?php echo $ser['ID'];?></td>
-                                <td><?php echo $ser['FullName'];?></td>
+                                <td class="td-ite"><?php echo $counter;  $counter++; ?></td>
+                                <td class="td-ite"><?php echo $ser['ID'];?></td>
+                                <td class="td-ite"><?php echo $ser['FullName'];?></td>
                                 <td class="noExl"><img class='img-card-person'
-                                        src='../../images/<?php echo $ser['Avatar']; ?>' alt=''>
+                                        src='../../images/img-anhthe/<?php echo $ser['Avatar']; ?>' alt=''>
                                 </td>
-                                <td><?php $date=date_create($ser['NgaySinh']); echo date_format($date,"d/m/Y"); ?>
+                                <td class="td-ite">
+                                    <?php $date=date_create($ser['NgaySinh']); echo date_format($date,"d/m/Y"); ?>
                                 </td>
-                                <td><?php echo $ser['SDT'];?></td>
-                                <td><?php echo $ser['ChucVu'];?></td>
+                                <td class="td-ite"><?php echo $ser['SDT'];?></td>
+                                <td class="td-ite"><?php echo $ser['ChucVu'];?></td>
                                 <td class="noExl">
-                                    <a href="view.php?id=<?php echo $ser['ID']; ?>"
-                                        class="btn btn-info btn-sm edit"><i class='far fa-eye'></i></a>
+                                    <a href="view.php?id=<?php echo $ser['ID']; ?>" class="btn btn-info btn-sm edit"><i
+                                            class='far fa-eye'></i></a>
                                     <button class='btn btn-save btn-sm edit' title='Sửa' id='show-emp'
                                         data-toggle='modal' data-target='#ModalEDit<?php echo $ser['ID'];?>'><i
                                             class='fas fa-edit'></i>
@@ -114,35 +115,40 @@ include "controller.php";
                                                                     value="<?php echo $ser['ID'];?>" disabled>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Họ và tên</label>
+                                                                <label class="control-label">Họ và tên <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="name"
                                                                     required value="<?php echo $ser['FullName'];?>">
                                                             </div>
                                                             <div class="form-group  col-md-6">
-                                                                <label class="control-label">Số điện thoại</label>
+                                                                <label class="control-label">Số điện thoại <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="number" name="sdt"
                                                                     required value="<?php echo $ser['SDT'];?>">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Địa chỉ email</label>
+                                                                <label class="control-label">Địa chỉ email <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="email"
                                                                     required value="<?php echo $ser['Email'];?>">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Địa chỉ</label>
+                                                                <label class="control-label">Địa chỉ <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="diachi"
                                                                     value="<?php echo $ser['DiaChi'];?>">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Ngày sinh</label>
+                                                                <label class="control-label">Ngày sinh <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="date" name="ngaysinh"
-                                                                    value="<?php echo $ser['NgaySinh'];?>">
+                                                                    required value="<?php echo $ser['NgaySinh'];?>">
                                                             </div>
                                                             <div class="form-group col-md-4">
                                                                 <label for="exampleSelect1" class="control-label">Chức
-                                                                    vụ</label>
+                                                                    vụ <sup class="sup-imp">*</sup></label>
                                                                 <select class="form-control" name="chucvu"
-                                                                    id="exampleSelect1">
+                                                                    id="exampleSelect1" required>
                                                                     <option value="<?php echo $ser['ChucVu'];?>">
                                                                         <?php echo $ser['ChucVu'];?></option>
                                                                     <?php
@@ -175,44 +181,53 @@ include "controller.php";
                                                                     <option value="Đại Học">Đại Học</option>
                                                                     <option value="Cao Đẳng">Cao Đẳng</option>
                                                                     <option value="Phổ Thông">Phổ Thông</option>
-                                                                    <option value="Chưa tốt nghiệp">Chưa tốt nghiệp</option>
-                                                                    <option value="Không bằng cấp">Không bằng cấp</option>
+                                                                    <option value="Chưa tốt nghiệp">Chưa tốt nghiệp
+                                                                    </option>
+                                                                    <option value="Không bằng cấp">Không bằng cấp
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">Account</label>
+                                                                <label class="control-label">Account <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="account"
-                                                                    value="<?php echo $ser['AccountLogin'];?>">
+                                                                    value="<?php echo $ser['AccountLogin'];?>" required>
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">Password</label>
+                                                                <label class="control-label">Password <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="password"
-                                                                    value="<?php echo $ser['Password'];?>">
+                                                                    value="<?php echo $ser['Password'];?>" required>
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">CCCD</label>
+                                                                <label class="control-label">CCCD <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="number" name="cccd"
-                                                                    value="<?php echo $ser['CCCD'];?>">
+                                                                    required value="<?php echo $ser['CCCD'];?>">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">Ngày cấp</label>
+                                                                <label class="control-label">Ngày cấp <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="date" name="ngaycap"
-                                                                    value="<?php echo $ser['NgayCap'];?>">
+                                                                    required value="<?php echo $ser['NgayCap'];?>">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">Nơi cấp</label>
+                                                                <label class="control-label">Nơi cấp <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="text" name="noicap"
-                                                                    value="<?php echo $ser['NoiCap'];?>">
+                                                                    required value="<?php echo $ser['NoiCap'];?>">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label class="control-label">Rule</label>
+                                                                <label class="control-label">Rule <sup
+                                                                        class="sup-imp">*</sup></label>
                                                                 <input class="form-control" type="number" name="rule"
-                                                                    value="<?php echo $ser['Rule'];?>">
+                                                                    required value="<?php echo $ser['Rule'];?>">
                                                             </div>
                                                             <div class="modal-footer col-md-12">
                                                                 <button class="btn btn-save" name="update"
                                                                     type="submit">Lưu lại</button>
-                                                                <button class="btn btn-cancel" type="reset">Hủy bỏ</button>   
+                                                                <button class="btn btn-cancel" type="reset">Hủy
+                                                                    bỏ</button>
                                                                 <button type="reset" class="btn btn-delete"
                                                                     id="btnReset" onclick="reSet()">Đóng</button>
                                                             </div>
@@ -260,6 +275,8 @@ include "controller.php";
                             <?php } ?>
                         </tbody>
                     </table>
+                    </div>
+                    <p id="table-notify"></p>    
                     <div id="pagination"></div>
                     <!-- MODAL DELETE ALL-->
                     <div class="modal fade" id="ModalDelAll" tabindex="-1" role="dialog" aria-hidden="true">

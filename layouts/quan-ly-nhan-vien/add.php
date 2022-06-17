@@ -129,40 +129,44 @@ include "controller.php";
                 echo 'NV' .rand(pow(10, $digits-1), pow(10, $digits)-1); ?>">
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Họ và tên</label>
+                            <label class="control-label">Họ và tên <sup class="sup-imp">*</sup></label>
                             <input name="name" class="form-control" type="text" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ email</label>
+                            <label class="control-label">Địa chỉ email <sup class="sup-imp">*</sup></label>
                             <input name="email" class="form-control" type="email" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ thường trú</label>
+                            <label class="control-label">Địa chỉ thường trú <sup class="sup-imp">*</sup></label>
                             <input name="diachi" class="form-control" type="text" required>
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Số điện thoại</label>
+                            <label class="control-label">Số điện thoại <sup class="sup-imp">*</sup></label>
                             <input type="tel" class="form-control" name="sdt" pattern="[0-9]{4}[0-9]{2}[0-9]{4}"
                                 required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Ngày sinh</label>
+                            <label class="control-label">Ngày sinh <sup class="sup-imp">*</sup></label>
                             <input name="ngaysinh" class="form-control" type="date" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Số CCCD</label>
+                            <label class="control-label">Số CCCD <sup class="sup-imp">*</sup></label>
                             <input class="form-control" name="cccd" type="number" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Ngày cấp</label>
+                            <label class="control-label">Ngày cấp <sup class="sup-imp">*</sup></label>
                             <input name="ngaycap" class="form-control" type="date" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Nơi cấp</label>
+                            <label class="control-label">Nơi cấp <sup class="sup-imp">*</sup></label>
                             <input name="noicap" class="form-control" type="text" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Giới tính</label>
+                            <label class="control-label">Ngày vào làm <sup class="sup-imp">*</sup></label>
+                            <input name="ngayvaolam" class="form-control" type="date" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Giới tính <sup class="sup-imp">*</sup></label>
                             <select name="gioitinh" class="form-control">
                                 <option>-- Chọn giới tính --</option>
                                 <option value="Nam">Nam</option>
@@ -171,8 +175,8 @@ include "controller.php";
                         </div>
 
                         <div class="form-group  col-md-3">
-                            <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                            <select name="chucvu" class="form-control">
+                            <label for="exampleSelect1" class="control-label">Chức vụ <sup class="sup-imp">*</sup></label>
+                            <select name="chucvu" class="form-control" required>
                                 <option>-- Chọn chức vụ --</option>
                                 <?php
                     $dataCV = "SELECT * FROM chucvu"; 
@@ -184,7 +188,7 @@ include "controller.php";
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Bằng cấp</label>
+                            <label class="control-label">Bằng cấp <sup class="sup-imp">*</sup></label>
                             <select name="bangcap" class="form-control">
                                 <option>-- Chọn bằng cấp --</option>
                                 <option value="Đại Học">Đại Học</option>
@@ -195,7 +199,7 @@ include "controller.php";
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Tình trạng hôn nhân</label>
+                            <label class="control-label">Tình trạng hôn nhân <sup class="sup-imp">*</sup></label>
                             <select name="honnhan" class="form-control" id="exampleSelect2">
                                 <option>-- Chọn tình trạng hôn nhân --</option>
                                 <option value="Độc thân">Độc thân</option>
@@ -204,11 +208,11 @@ include "controller.php";
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Account</label>
+                            <label class="control-label">Account <sup class="sup-imp">*</sup></label>
                             <input name="account" class="form-control" type="text" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Password</label>
+                            <label class="control-label">Password <sup class="sup-imp">*</sup></label>
                             <div class="box-password">
                                 <input autocomplete="off" class="input100 form-control" type="password"
                                     placeholder="Password" name="password" id="password-field" min="4" max="8" value=""
@@ -218,14 +222,14 @@ include "controller.php";
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Rule</label>
+                            <label class="control-label">Rule <sup class="sup-imp">*</sup></label>
                             <select name="rule" class="form-control" id="exampleSelect3" required>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh 3x4 nhân viên</label>
+                            <label class="control-label">Ảnh 3x4 nhân viên <sup class="sup-imp">*</sup></label>
                             <div id="myfileupload">
                                 <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);"
                                     required />

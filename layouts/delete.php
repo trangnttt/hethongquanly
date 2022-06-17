@@ -3,7 +3,7 @@ require_once '../connect.php';
 $table=$_REQUEST['table'];
 if(isset($_REQUEST['id'])) {
     $id = $_REQUEST['id'];
-    $query = "DELETE FROM $table WHERE id='".$id."'"; 
+    $query = "DELETE FROM $table WHERE ID='".$id."'"; 
 }
 else {
     $query = "DELETE FROM $table"; 

@@ -17,13 +17,6 @@ require_once '../../connect.php';
             <div class="tile">
                 <h3 class="tile-title">Tạo mới danh sách nội bộ</h3>
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
-                                        class="fas fa-folder-plus"></i> Tạo tình trạng mới</b></a>
-                        </div>
-
-                    </div>
                     <form class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label">Họ và tên</label>
@@ -56,8 +49,10 @@ require_once '../../connect.php';
                             <label for="exampleSelect1" class="control-label">Tình trạng</label>
                             <select class="form-control" id="exampleSelect1">
                                 <option>-- Chọn tình trạng --</option>
+                                <option>Khiển trách</option>
+                                <option>Cảnh cáo</option>
+                                <option>Hạ bậc lương</option>
                                 <option>Sa thải</option>
-                                <option>Khóa tài khoản</option>
                             </select>
                         </div>
 
@@ -71,39 +66,6 @@ require_once '../../connect.php';
             </div>
 </main>
 
-<!--
-  MODAL
--->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-                        <span class="thong-tin-thanh-toan">
-                            <h5>Tạo trình trạng mới</h5>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Nhập tình trạng</label>
-                        <input class="form-control" type="text" required>
-                    </div>
-                </div>
-                <BR>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-<!--
-MODAL
--->
 
 
 <?php include "../../includes/footer.php" ?>

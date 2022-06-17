@@ -48,7 +48,7 @@
             <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
+                  <th width="10">STT</th>
                   <th>Họ và Tên</th>
                   <th>Ngày sinh</th>
                   <th>Chức vụ</th>
@@ -59,7 +59,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10">1</td>
                   <td>Kiều Thái Anh</td>
                   <td>10/09/1998</td>
                   <td>Thu Ngân</td>
@@ -72,7 +72,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10">1</td>
                   <td>Nguyễn Thị Kim Yến</td>
                   <td>02/12/1999</td>
                   <td>Thu Ngân</td>
@@ -85,7 +85,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10">1</td>
                   <td>Nguyễn Hoàng Thái Nhật</td>
                   <td>07/02/1996</td>
                   <td>Quản kho</td>
@@ -98,7 +98,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10">1</td>
                   <td>Võ Thành Nam</td>
                   <td>19/09/1999</td>
                   <td>Dịch vụ</td>

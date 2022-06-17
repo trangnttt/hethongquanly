@@ -1,12 +1,64 @@
 Code by Trần Kiến Phong
 
-Admin
+CSDL: hethongquanly
+:::::::::::::::::::Admin:::::::::::::::::::::::::::::
+
+::::::Folder:::::
+.vscode
+ckeditor
+images
+  _img-anhthe
+  _img-sanpham
+includes
+  _header.php
+  _footer.php
+  _sidebar.php
+layouts
+  _dashboard
+    __index.php
+    __view.php
+  _login
+    __index.php
+    __controller.php  
+  _phan-mem-ban-hang
+    __index.php
+    __controller.php  
+  _quan-ly-nhan-vien
+    __index.php
+    __controller.php  
+    __add.php
+    __view.php
+  _quan-ly-san-pham
+  _quan-ly-bao-cao
+  _quan-ly-don-hang
+  _quan-ly-luong
+  _quan-ly-noi-bo
+  _delete.php
+  _logout.php
+styles
+  _css
+  _js
+  _fonts
+  _vendor
+auth.php  => check xem đã có $_SESSION['username']
+connect.php => kết nối database
+index.php 
+README
+
+
+::::::::::Hướng dẫn sử dụng:::::::::
 - Bảng điều khiển
 - Bán hàng
-- Quản lý nhân viên => bảng nhân viên ()
+- Quản lý nhân viên => bảng nhanvien
+(ID,FullName, Email, DiaChi, SDT, NgaySinh, CCCD,NgayCap, NoiCap, GioiTinh, ChucVu, 
+BangCap,TinhTrangHonNhan, AccountLogin, Password, Avatar, Rule, NgayVaoLam, CreateDate)
+  + Theo tác thêm, xóa, sửa nhân viên
+  + Thêm, xóa chức vụ trong add.php
+=> Khi xóa chức vụ thì bảng nhanvien sẽ update nhân viên 
+thuộc chức vụ đó thành "Chưa có chức vụ"
 - Quản lý khách hàng
 - Quản lý sản phẩm
 - Quản lý đơn hàng
-- Quản lý nội bộ
+- Quản lý nội bộ 
 - Bảng lương
 - Báo cáo doanh thu

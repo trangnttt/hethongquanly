@@ -1,7 +1,7 @@
 <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/<?php echo $_SESSION['avatar']; ?>" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../../images/img-anhthe/<?php echo $_SESSION['avatar']; ?>" width="50px"
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b><?php echo $_SESSION['username']; ?></b></p>
